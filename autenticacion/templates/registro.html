@@ -1,3 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %} Resgistro {% endblock %}
+
+{% block content %}
+
+    <form method="POST" action="" class="mt-2" autocomplete="off">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-success">Crear Cuenta</button>
+    </form>
+
+{% endblock %}
