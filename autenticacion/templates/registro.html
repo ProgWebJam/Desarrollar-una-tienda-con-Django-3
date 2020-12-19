@@ -4,9 +4,11 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
+
     <form method="POST" action="" class="mt-2" autocomplete="off">
         {% csrf_token %}
-        {{ form }}
+        {{ form | crispy }}
         <button type="submit" class="btn btn-success">Crear Cuenta</button>
     </form>
 
