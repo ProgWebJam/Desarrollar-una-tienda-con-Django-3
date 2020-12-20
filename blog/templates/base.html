@@ -35,6 +35,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Hola {{ user.username }}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'salir' %}">Cerrar sesión</a>
+                    </li>
                 {% else %}
                 {% endif %}
             </ul>

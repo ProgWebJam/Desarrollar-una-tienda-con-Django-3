@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 
-# Create your views here.
+#Registrar Usuario
 class VistaRegistro(View): 
     def get(self, request):
         form = UserCreationForm()
@@ -23,3 +23,9 @@ class VistaRegistro(View):
             for msg in form.error_messages:
                 messages.error(request, form.error_messages[msg])
             return render( request,'registro.html',{"form":form})
+
+#Cerrar Sesion
+def salir(request):
+    logout(request)
+    messages.success(request,f"Tu sesion se ha cerrado correctamente")
+    return redirect("blog")
