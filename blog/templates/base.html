@@ -39,6 +39,12 @@
                         <a class="nav-link" href="{% url 'salir' %}">Cerrar sesión</a>
                     </li>
                 {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'acceder' %}">Acceder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'registro' %}">Registro</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
