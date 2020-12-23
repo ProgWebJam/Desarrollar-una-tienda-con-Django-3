@@ -3,4 +3,46 @@
 {% block title %} Blog {% endblock %}
 
 {% block content %}
+    <div class="mt-3">
+        <div class="row mb-3">
+
+            <!--Boton crear-->
+            <!-- offset-9 y float-right para alinear a la derecha-->
+            <div class="col-3 offset-9">
+                <a href="{% url 'crear_post' %}" class="btn btn-primary float-right">
+                    crear nuevo post
+                </a>  
+            </div>
+
+        </div>
+        <!--listar post-->
+        {% if posts %}
+
+            {% for post in posts %}
+
+                <!--si estamos en la primera interacion  entonces abra etiqueta row -->
+                {% if forloop.first %}<div class="row">{% endif %}
+                <div class="col-4">
+                    <div class="card">
+                        <img class="card-img-top" height="180" src="{{ post.imagen.url }}" alt="{{ post.titulo}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.titulo }}</h5>
+                            <hr />
+                            <h6 class="card-subtitle">Autor: {{ post.autor.username}}</h6>
+                            <p class="card-text">Categoria: {{ post.categoria.nombre }}</p>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <!--si el content total es divisible entre 3 entonces cerramos el div y abrimos de nuevo row-->
+                {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+                <!--si estamos en la ultima interacion  entonces cerramos el div -->
+                {% if forloop.last %}</div>{% endif %}
+
+            {% endfor %}
+
+        {% else %}
+            <div class="alert alert-danger"> No existe post creados </div>
+        {% endif%}
+    </div>
 {% endblock %}

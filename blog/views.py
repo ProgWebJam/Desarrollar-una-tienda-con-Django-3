@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from blog.forms import FormularioPost
 from django.contrib import messages
+from blog.models import Post
 
 def index(request):
-    return render(request,"blog.html")
+    post = Post.objects.all()
+    return render(request,"blog.html",{"posts":post})
 
 def crear_post(request):
     if request.method == "POST":
