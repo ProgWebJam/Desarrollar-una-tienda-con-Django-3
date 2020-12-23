@@ -41,6 +41,8 @@
 
             {% endfor %}
 
+            {% include "paginacion.html" %}
+
         {% else %}
             <div class="alert alert-danger"> No existe post creados </div>
         {% endif%}

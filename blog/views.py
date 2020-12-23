@@ -3,10 +3,21 @@ from django.http import HttpResponse
 from blog.forms import FormularioPost
 from django.contrib import messages
 from blog.models import Post
+from django.core.paginator import Paginator
 
 def index(request):
-    post = Post.objects.all()
-    return render(request,"blog.html",{"posts":post})
+    listado_posts = Post.objects.all()
+    #se va a paginar de 3
+    paginator = Paginator(listado_posts, 3)
+    #recuperar la pagina actual en la varile page
+    pagina = request.GET.get("page") or 1
+    #los post que nosotros necesitamos
+    posts = paginator.get_page(pagina)
+    #convertimos la variable page como un entero
+    pagina_actual = int(pagina)
+    #define inicio y final y numero de pagina interable
+    paginas = range(1, posts.paginator.num_pages +1)
+    return render(request,"blog.html",{"posts":posts, "paginas": paginas, "pagina_actual": pagina_actual})
 
 def crear_post(request):
     if request.method == "POST":
