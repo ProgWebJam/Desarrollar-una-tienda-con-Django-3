@@ -36,3 +36,20 @@ def crear_post(request):
 
     form = FormularioPost()
     return render(request,"crear_post.html",{"form":form})
+
+def eliminar_post(request,post_id):
+    try:
+        post = Post.objects.get(pk=post_id)
+
+    except Post.DoesNotExist:
+        messages.error(request, "El post que quieres eliminar no existe")
+        return redirect("blog")
+
+    if post.autor != request.user:
+        messages.error(request, "No eres el autor de este post")
+        return redirect("blog")
+
+    post.delete()
+    messages.success(request, f"El post {post.tiutlo} ha sido eliminado!")
+    return redirect("blog")
+

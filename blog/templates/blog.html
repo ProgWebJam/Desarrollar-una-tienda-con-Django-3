@@ -31,6 +31,15 @@
                             <h6 class="card-subtitle">Autor: {{ post.autor.username}}</h6>
                             <p class="card-text">Categoria: {{ post.categoria.nombre }}</p>
                         </div>
+
+                        <div class="card-footer">
+                            {% if user == post.autor %}
+                            <a href="{% url 'eliminar_post' post.id %}" class="btn btn-danger">
+                                Eliminar post
+                            </a>
+                            {% endif %}
+                        </div>
+
                     </div>
                     <br>
                 </div>
