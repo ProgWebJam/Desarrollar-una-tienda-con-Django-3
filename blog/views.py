@@ -50,6 +50,6 @@ def eliminar_post(request,post_id):
         return redirect("blog")
 
     post.delete()
-    messages.success(request, f"El post {post.tiutlo} ha sido eliminado!")
+    messages.success(request, f"El post {post.titulo} ha sido eliminado!")
     return redirect("blog")
 
