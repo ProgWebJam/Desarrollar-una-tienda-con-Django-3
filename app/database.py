@@ -1,7 +1,7 @@
 MYSQL = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'curso_django',
+        'NAME': 'django_shop',
         'USER': 'root',
         'PASSWORD': 'j4mMySQL4dm*',
         'PORT': '3306',
