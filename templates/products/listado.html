@@ -1,9 +1,13 @@
 {% extends  'layouts/tienda.html' %}
 
+<!--Cargar los filtros -->
+{% load cart_tags %}
+
 {% block title %} Tienda {% endblock %}
 
 {% block content %}
-
+<!--Cargar los filtros -->
+Total : {{ 9|multiply:5|money_format:"$" }}
 <div class="row">
 
     <!-- articulos -->
