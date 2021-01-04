@@ -5,25 +5,25 @@ from .cart import Cart
 
 # agregar productos
 @login_required(login_url="/autenticacion/login")
-def add_product(request, products_id):
+def add_product(request, product_id):
     cart = Cart(request)
-    Product = Product.objects.get(id=product_id)
+    product = Product.objects.get(id=product_id)
     cart.add(product=product)
     return redirect("listado_productos")
 
 #Remover productos.
 @login_required(login_url="/autenticacion/login")
-def remove_product(request, products_id):
+def remove_product(request, product_id):
     cart = Cart(request)
-    Product = Product.objects.get(id=product_id)
+    product = Product.objects.get(id=product_id)
     cart.remove(product)
     return redirect("listado_productos")
 
 #Decrementar productos.
 @login_required(login_url="/autenticacion/login")
-def decrement_product(request, products_id):
+def decrement_product(request, product_id):
     cart = Cart(request)
-    Product = Product.objects.get(id=product_id)
+    product = Product.objects.get(id=product_id)
     cart.decrement(product=product)
     return redirect("listado_productos")
 

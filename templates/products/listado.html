@@ -6,8 +6,12 @@
 {% block title %} Tienda {% endblock %}
 
 {% block content %}
-<!--Cargar los filtros -->
+<!--Cargar los filtros 
 Total : {{ 9|multiply:5|money_format:"$" }}
+-->
+<!--Cargar los CONTEXT PROCESSOR -->
+Total : {{ cart_total_amount|money_format:"$" }}
+
 <div class="row">
 
     <!-- articulos -->
@@ -23,7 +27,7 @@ Total : {{ 9|multiply:5|money_format:"$" }}
                             <p class="card-text">{{ product.price }}</p>
                         </div>
                         <div class="card-footer text-center">
-                            <div href="#" class="btn btn-success">Añadir al carrito</div>
+                            <a href="{% url 'cart:add_product' product.id %}" class="btn btn-success">Añadir al carrito</a>
                         </div>
                     </div>
                 </div>
@@ -33,7 +37,7 @@ Total : {{ 9|multiply:5|money_format:"$" }}
 
     <!-- carrito -->
     <div class="col-3">
-
+        {% include "cart/widget.html" %}  
     </div>
 
 
