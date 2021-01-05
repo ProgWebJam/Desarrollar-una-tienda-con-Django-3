@@ -13,9 +13,9 @@ class Order(models.Model):
 
     @property
     def total(self):
-        return self.OrderLine.set.aggregate(
+        return self.orderline_set.aggregate(
             #F = saca toda la informacion que necesitamos
-            total = sum( F("product__price")*F("quantity"), output_field=FloatField())
+            total = Sum( F("product__price")*F("quantity"), output_field=FloatField())
         )["total"] or FloatField(0)
 
     def __str__(self):

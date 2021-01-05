@@ -54,7 +54,7 @@
         {% if request.session.cart.items %}
             <tr>
                 <td colspan="3">
-                    <a href="#" class="btn btn-success">Crear Pedido</a> 
+                    <a href="{% url 'process_order' %}" class="btn btn-success">Crear Pedido</a> 
                 </td>
             </tr>
         {% endif %}

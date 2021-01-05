@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.shortcuts import rendirect
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.views.generic.list import ListView
@@ -27,6 +27,27 @@ def process_order(request):
     #bulk_create= crea muchos registros de forma optimizada en la BD
     OrderLine.objects.bulk_create(order_lines)
 
-    #Metodo para enviar correo
+    send_order_email(
+        order=order,
+        order_lines=order_lines,
+        username=request.user.username,
+        user_email=request.user.email
+    )
+
+    cart.clear()
+    
     messages.success(request, "El pedido se a creado correctamente!")
-    return rendirect("Listado_productos")
+    return redirect("listado_productos")
+
+#Metodo para enviar correo
+def send_order_email(**kwargs):
+    subject = "Gracias por tu pedido"
+    html_message = render_to_string("emails/nuevo_pedido.html", {
+        "order": kwargs.get("order"),
+        "order_lines": kwargs.get("order_lines"),
+        "username": kwargs.get("username")
+    })
+    plain_message = strip_tags(html_message)
+    from_email = "jhonmaruloo2012@gmail.com"
+    to = kwargs.get("user_email")
+    send_mail(subject,plain_message,from_email,[to], html_message=html_message)
