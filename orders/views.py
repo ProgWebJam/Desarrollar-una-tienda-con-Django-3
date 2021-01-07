@@ -51,3 +51,14 @@ def send_order_email(**kwargs):
     from_email = "jhonmaruloo2012@gmail.com"
     to = kwargs.get("user_email")
     send_mail(subject,plain_message,from_email,[to], html_message=html_message)
+
+#lista de los pedidos
+class OrderList(ListView):
+    model = Order
+    ordering = ["-id"]
+    template_name = "orders/listado.html"
+
+    #pedido usuario
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
